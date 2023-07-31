@@ -13,10 +13,11 @@ from base.dataset import get_filtered_chars
 def main():
     root_dir = sys.argv[1]
     print(root_dir)
-    ttffiles = sorted(Path(root_dir).rglob("*.ttf"))
+    # ttffiles = sorted(Path(root_dir).rglob("*.ttf"))
+    ttffiles = sorted(Path(root_dir).rglob("*.ttf"), key=lambda x: x.name.lower()) + sorted(Path(root_dir).rglob("*.TTF"), key=lambda x: x.name.lower())
 
     for ttffile in tqdm(ttffiles):
-        txtfile = Path(str(ttffile).replace(".ttf", ".txt"))
+        txtfile = Path(str(ttffile).replace(".ttf", ".txt").replace(".TTF", ".txt"))
         if txtfile.is_file():
             continue
         try:
